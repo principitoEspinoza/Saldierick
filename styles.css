@@ -1,0 +1,789 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+/* Contenedor principal del chat */
+.chat-container {
+    display: flex;
+    height: 100vh;
+}
+
+/* Estilos para la barra lateral */
+.sidebar {
+    width: 250px;
+    background-color: #fff;
+    border-right: 1px solid #ccc;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header h1 {
+    font-size: 24px;
+}
+
+.search-bar {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 150px;
+}
+
+.add-contact {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.user:hover {
+    background-color: #f0f0f0;
+}
+
+.profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.user-info {
+    flex: 1;
+}
+
+.last-seen {
+    font-size: 12px;
+    color: #777;
+}
+
+/* Estilos para la caja de chat */
+.chat-box {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+}
+
+.header-chat {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.header-user {
+    display: flex;
+    align-items: center;
+}
+
+.profile-button {
+    margin-left: auto;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+/* Estilos para el área de mensajes */
+.messages {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    border-bottom: 1px solid #ccc;
+}
+
+/* Estilos para los mensajes */
+.message {
+    background-color: #E1FFC7;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    max-width: 70%;
+    clear: both;
+}
+
+.input-area {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+}
+
+#messageInput {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.emoji-button, .send-button, .audio-button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+.file-input {
+    margin-left: 5px;
+}
+
+/* Ocultar audio por defecto */
+audio {
+    display: none;
+}
+.input-area {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.record-button {
+    background-color: transparent; /* Fondo transparente */
+    border: none; /* Sin borde */
+    cursor: pointer; /* Cursor en forma de puntero */
+    display: flex; /* Flex para alinear el ícono y el texto */
+    align-items: center; /* Centra verticalmente el ícono y el texto */
+    color: #007bff; /* Color azul */
+    font-size: 16px; /* Tamaño de la fuente */
+}
+
+.record-button:hover {
+    color: #0056b3; /* Color azul más oscuro al pasar el mouse */
+}
+
+.icon {
+    width: 24px; /* Ancho del ícono */
+    height: 24px; /* Alto del ícono */
+    margin-right: 5px; /* Espaciado entre el ícono y el texto */
+}
+.input-area {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.send-button, .record-button {
+    background-color: #007bff; /* Color azul */
+    border: none; /* Sin borde */
+    color: white; /* Color del texto */
+    padding: 10px 15px; /* Espaciado interno */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cursor en forma de puntero */
+    display: flex; /* Flex para alinear el ícono y el texto */
+    align-items: center; /* Centra verticalmente el ícono y el texto */
+    font-size: 16px; /* Tamaño de la fuente */
+    margin-left: 10px; /* Espacio entre los botones */
+}
+
+.send-button:hover, .record-button:hover {
+    background-color: #0056b3; /* Color azul más oscuro al pasar el mouse */
+}
+
+.icon {
+    width: 24px; /* Ancho del ícono */
+    height: 24px; /* Alto del ícono */
+    margin-right: 5px; /* Espaciado entre el ícono y el texto */
+}
+.emoji-picker {
+    display: flex; /* Para que se alineen los emojis */
+    margin-top: 10px; /* Espacio entre el área de entrada y el selector */
+}
+
+.emoji {
+    font-size: 32px; /* Tamaño del emoji aumentado */
+    cursor: pointer; /* Cursor en forma de puntero */
+    margin-right: 5px; /* Espacio entre los emojis */
+}
+
+.emoji-picker span:hover {
+    transform: scale(1.2); /* Aumentar el tamaño al pasar el mouse */
+}
+/* chat.css */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+.chat-container {
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #fff;
+    border-right: 1px solid #ccc;
+    padding: 10px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header h1 {
+    font-size: 24px;
+    margin: 0;
+}
+
+.add-contact {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.add-contact:hover {
+    background-color: #0056b3;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.user:hover {
+    background-color: #f0f0f0;
+}
+
+.profile-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.last-seen {
+    font-size: 12px;
+    color: #888;
+}
+
+.chat-box {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+}
+
+.header-chat {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.input-area {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #ccc;
+}
+
+.input-area input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.input-area button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.input-area button:hover {
+    background-color: #0056b3;
+}
+
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; 
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; 
+    max-width: 500px;
+    text-align: center;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.emoji-picker {
+    display: flex;
+    flex-wrap: wrap;
+    position: absolute;
+    bottom: 50px;
+    right: 10px;
+    border: 1px solid #ccc;
+    background: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.emoji {
+    cursor: pointer;
+    font-size: 24px;
+    margin: 5px;
+}
+.message-time {
+    display: block; /* Hace que la hora se muestre en una nueva línea */
+    font-size: 12px;
+    color: #888; /* Un color gris para que no sea muy prominente */
+    margin-top: 2px; /* Espaciado entre el mensaje y la hora */
+}
+/* Estilos básicos para el chat */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100vh;
+}
+
+.chat-container {
+    display: flex;
+    width: 100%;
+}
+
+.sidebar {
+    width: 300px;
+    border-right: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    padding: 20px;
+    background-color: #f1f1f1;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    cursor: pointer;
+}
+
+.user:hover {
+    background-color: #f9f9f9;
+}
+
+.profile-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.chat-box {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+}
+
+.header-chat {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #ccc;
+}
+
+.input-area {
+    display: flex;
+    padding: 10px;
+}
+
+.input-area input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 300px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+.messages {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    background-color: white;
+}
+
+.message {
+    padding: 10px;
+    border-radius: 10px;
+    margin: 5px 0;
+    position: relative;
+    max-width: 75%; /* Limitar el ancho del mensaje */
+}
+
+.message.sent {
+    background-color: #0078d7; /* Color de fondo para mensajes enviados */
+    color: white;
+    align-self: flex-end; /* Alinear a la derecha */
+}
+
+.message.received {
+    background-color: #e0e0e0; /* Color de fondo para mensajes recibidos */
+    align-self: flex-start; /* Alinear a la izquierda */
+}
+
+.message-time {
+    font-size: 0.8em;
+    color: #999;
+    position: absolute;
+    bottom: -15px; /* Posicionar debajo del mensaje */
+    right: 10px; /* Alinear a la derecha */
+}
+/* Estilos para los mensajes */
+.message {
+    padding: 10px;
+    border-radius: 10px; /* Bordes redondeados */
+    margin-bottom: 10px;
+    position: relative;
+    max-width: 75%; /* Limitar el ancho del mensaje */
+    word-wrap: break-word; /* Ajustar texto largo */
+    border: 2px solid transparent; /* Borde por defecto */
+    transition: border-color 0.3s; /* Transición suave al cambiar el borde */
+    display: inline-block; /* Asegura que el cuadro se ajuste al contenido */
+}
+
+/* Estilos para mensajes enviados */
+.message.sent {
+    background-color: #0078d7; /* Color de fondo para mensajes enviados */
+    color: white;
+    align-self: flex-end; /* Alinear a la derecha */
+    border-color: #0056b3; /* Color del borde para mensajes enviados */
+}
+
+/* Estilos para mensajes recibidos */
+.message.received {
+    background-color: #e0e0e0; /* Color de fondo para mensajes recibidos */
+    color: black;
+    align-self: flex-start; /* Alinear a la izquierda */
+    border-color: #ccc; /* Color del borde para mensajes recibidos */
+}
+
+/* Efecto al pasar el mouse sobre los mensajes */
+.message:hover {
+    border-color: #007BFF; /* Cambia el color del borde al pasar el mouse */
+}
+/* Estilos para el contenedor de mensajes */
+.messages {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto; /* Permitir el desplazamiento */
+    background-color: white;
+    display: flex; /* Usar flexbox para alinear los mensajes */
+    flex-direction: column; /* Alinear los mensajes en columna */
+    gap: 10px; /* Espacio entre mensajes */
+}
+/* Contenedor para la cabecera del chat */
+.header-chat {
+    display: flex;
+    justify-content: space-between; /* Asegura que los elementos dentro estén separados */
+    align-items: center; /* Alinea verticalmente el contenido */
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    background-color: #f5f5f5;
+}
+
+/* Información del perfil */
+.header-chat .profile-info {
+    display: flex;
+    align-items: center; /* Alinea verticalmente la imagen y la información */
+}
+
+/* Imagen del perfil */
+.header-chat .profile-pic {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    margin-right: 10px; /* Añade un pequeño espacio entre la imagen y el texto */
+}
+
+/* Botón de ver perfil */
+.header-chat .profile-button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#messages {
+    max-height: 400px;
+    overflow-y: auto;
+}
+.message audio {
+    margin-top: 10px;
+}
+/* Estilo para el texto de los mensajes enviados */
+.message.sent .message-text {
+    
+    color: rgb(0, 0, 0); /* Texto azul */
+    padding: 10px;
+    border: 2px solid blue; /* Solo borde azul */
+    border-radius: 10px; /* Bordes redondeados */
+    max-width: 60%;
+    word-wrap: break-word;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+/* Estilo para los emojis enviados */
+.message.sent .emoji {
+    background-color: transparent; /* Fondo transparente */
+    padding: 5px;
+   
+    border-radius: 10px; /* Bordes redondeados */
+    display: inline-block;
+    margin-bottom: 10px;
+    font-size: 24px; /* Ajusta el tamaño del emoji si es necesario */
+}
+/* Estilo general */
+#chat {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100%;
+    background-color: #f0f0f0;
+}
+
+/* Estilo del header del chat */
+#chatHeader {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #075e54;
+    color: white;
+}
+
+#chatHeader img {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+/* Estilo del contenedor de mensajes */
+#messages {
+    flex-grow: 1;
+    padding: 10px;
+    overflow-y: auto;
+    background-color: #e5ddd5;
+}
+
+/* Estilo general de los mensajes */
+.message {
+    display: inline-block;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 10px;
+    max-width: 80%;
+    word-wrap: break-word;
+    font-size: 14px;
+    position: relative;
+}
+
+/* Mensaje enviado (alineado a la derecha) */
+.sent-message {
+    background-color: #dcf8c6;
+    align-self: flex-end;
+    text-align: right;
+}
+
+/* Mensaje recibido (alineado a la izquierda) */
+.received-message {
+    background-color: white;
+    align-self: flex-start;
+}
+
+/* Estilo para la hora del mensaje */
+.message-time {
+    font-size: 10px;
+    color: gray;
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+}
+
+/* Estilo del input de mensaje */
+#messageBox {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: white;
+    border-top: 1px solid #ddd;
+}
+
+#messageInput {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 14px;
+    outline: none;
+}
+
+#messageBox button {
+    margin-left: 10px;
+    background-color: #075e54;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* Estilo para el selector de emojis */
+#emojiPicker {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 5px;
+    background-color: white;
+    border: 1px solid #ddd;
+    max-width: 300px;
+    position: absolute;
+    bottom: 60px;
+}
+/* Mensaje general */
+.message {
+    display: inline-block;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 10px;
+    max-width: 80%;
+    word-wrap: break-word;
+    font-size: 14px;
+    position: relative;
+    background-color: #ffffff;
+}
+
+/* Mensaje enviado (alineado a la derecha) */
+.sent-message {
+    background-color: #dcf8c6;
+    align-self: flex-end;
+    text-align: left;
+}
+
+/* Mensaje recibido (alineado a la izquierda) */
+.received-message {
+    background-color: #ffffff;
+    align-self: flex-start;
+    text-align: left;
+}
+
+/* Estilo para la hora del mensaje */
+.message-time {
+    font-size: 10px;
+    color: gray;
+    display: block;
+    text-align: right;
+    margin-top: 5px;
+}
+.message-time {
+    font-size: 0.8em; /* Tamaño de fuente más pequeño */
+    color: gray;      /* Color gris para diferenciar */
+    margin-top: 5px; /* Espacio entre el mensaje y la hora */
+}

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .chatbox-button {
+            background-color: blue; /* Color de fondo azul */
+            color: white; /* Color del texto blanco */
+            border: none; /* Sin borde */
+            border-radius: 5px; /* Bordes redondeados */
+            padding: 10px 15px; /* Espaciado interno */
+            cursor: pointer; /* Cambia el cursor al pasar el mouse */
+            transition: background-color 0.3s; /* Transición suave */
+        }
+        
+        .chatbox-button:hover {
+            background-color: darkblue; /* Color al pasar el mouse */
+        }
+    </style>
+    <title>Chat SaldiErick</title>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="sidebar">
+            <div class="header">
+                <h1>Chats</h1>
+                <button class="add-contact" onclick="openAddContactModal()">Agregar Contacto</button>
+            </div>
+            <div id="userList">
+                <div class="user" onclick="selectChat('Carlos', 'img/Carlos.jpg', 'Última vez hace 10 minutos', '123456789')">
+                    <img src="img/Carlos.jpg" alt="Carlos" class="profile-pic">
+                    <div class="user-info">
+                        <span>Carlos</span>
+                        <span class="last-seen">Última vez hace 10 minutos</span>
+                    </div>
+                </div>
+                <div class="user" onclick="selectChat('María', 'img/Maria.jpg', 'Última vez hace 2 horas', '987654321')">
+                    <img src="img/Maria.jpg" alt="María" class="profile-pic">
+                    <div class="user-info">
+                        <span>María</span>
+                        <span class="last-seen">Última vez hace 2 horas</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="chat-box">
+            <div class="header-chat">
+                <div class="header-user">
+                    <img id="chatProfilePic" class="profile-pic" src="img/logo.jpg" alt="Perfil" style="width: 50px; height: 50px;">
+                    <div class="user-info">
+                        <span id="chatUser">Selecciona un chat</span>
+                        <span class="last-seen" id="lastSeen"></span>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 20px;">
+                    <button class="profile-button" onclick="openProfileModal()">Ver Perfil</button>
+                    <button class="chatbox-button" onclick="openChatboxModal()">Chatbox</button>
+                </div>
+            </div>
+
+            <div class="messages" id="messages"></div>
+            <div class="input-area">
+                <input type="text" placeholder="Escribe un mensaje..." id="messageInput">
+                <button class="emoji-button" onclick="toggleEmojiPicker()">😊</button>
+                <button class="send-button" onclick="sendMessage()">Enviar</button>
+                <button class="record-button" id="recordButton" onclick="toggleRecording()">🎤</button>
+                <audio id="audioPlayback" controls style="display:none;"></audio>
+            </div>
+            <div id="emojiPicker" class="emoji-picker" style="display: none;">
+                <span class="emoji" onclick="insertEmoji('😀')">😀</span>
+                <span class="emoji" onclick="insertEmoji('😂')">😂</span>
+                <span class="emoji" onclick="insertEmoji('😍')">😍</span>
+                <span class="emoji" onclick="insertEmoji('😢')">😢</span>
+                <span class="emoji" onclick="insertEmoji('😎')">😎</span>
+                <span class="emoji" onclick="insertEmoji('👌')">👌</span>
+                <span class="emoji" onclick="insertEmoji('😇')">😇</span>
+                <span class="emoji" onclick="insertEmoji('😒')">😒</span>
+                <span class="emoji" onclick="insertEmoji('❤️')">❤️</span>
+                <span class="emoji" onclick="insertEmoji('😘')">😘</span>
+                <span class="emoji" onclick="insertEmoji('🥹')">🥹</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="addContactModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeAddContactModal()">&times;</span>
+            <h2>Agregar Contacto</h2>
+            <input type="text" id="contactName" placeholder="Nombre" required>
+            <input type="text" id="contactNumber" placeholder="Número de Teléfono" required>
+            <input type="file" id="contactImage" accept="image/*"> <!-- Campo para subir imagen -->
+            <button onclick="addContact()">Agregar</button>
+        </div>
+    </div>
+
+    <div id="profileModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeProfileModal()">&times;</span>
+            <h2>Perfil</h2>
+            <p><strong>Nombre:</strong> <span id="profileName"></span></p>
+            <p><strong>Número de Teléfono:</strong> <span id="profileNumber"></span></p>
+            <button onclick="openEditProfileModal()">Editar Perfil</button>
+        </div>
+    </div>
+
+    <div id="editProfileModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeEditProfileModal()">&times;</span>
+            <h2>Editar Perfil</h2>
+            <input type="text" id="editProfileName" placeholder="Nuevo Nombre" required>
+            <input type="text" id="editProfileNumber" placeholder="Nuevo Número de Teléfono" required>
+            <button onclick="saveProfileChanges()">Guardar Cambios</button>
+        </div>
+    </div>
+
+    <div id="chatboxModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeChatboxModal()">&times;</span>
+            <h2>Asistente de Preguntas</h2>
+            <input type="text" id="chatboxInput" placeholder="¿Qué deseas saber?" required>
+            <button onclick="sendChatboxQuery()">Enviar</button>
+            <div id="chatboxResponses" class="chatbox-responses"></div>
+        </div>
+    </div>
+
+    <script src="js/chat.js"></script>
+    <script src="js/chat1.js"></script>
+    <script src="js/cont.js"></script>
+    <script src="js/respuestas.js"></script> 
+    <script src="js/api.js"></script> 
+    <script src="js/server.js"></script>
+    <script>
+        function openChatboxModal() {
+            document.getElementById('chatboxModal').style.display = 'block';
+        }
+
+        function closeChatboxModal() {
+            document.getElementById('chatboxModal').style.display = 'none';
+            document.getElementById('chatboxResponses').innerHTML = ''; 
+            document.getElementById('chatboxInput').value = ''; 
+        }
+
+        function sendChatboxQuery() {
+            const query = document.getElementById('chatboxInput').value.toLowerCase();
+            const responseContainer = document.getElementById('chatboxResponses');
+            let response;
+
+            switch (query) {
+                case '¿cómo agregar un contacto?':
+                    response = 'Para agregar un contacto, haz clic en el botón "Agregar Contacto" en la parte superior de la barra lateral. Luego, completa el formulario con el nombre, número de teléfono y una foto opcional, y haz clic en "Agregar".';
+                    break;
+                case '¿cómo enviar un emoji?':
+                    response = 'Para enviar un emoji, haz clic en el botón de la carita sonriente 😊 junto al campo de texto donde escribes el mensaje. Aparecerá una selección de emojis, selecciona el que quieras y se agregará al mensaje.';
+                    break;
+                case '¿cómo grabar un audio?':
+                    response = 'Para grabar un audio, haz clic en el ícono del micrófono 🎤 al lado del botón de enviar mensaje. Mantén presionado para grabar y suelta cuando termines. El mensaje de audio se enviará automáticamente.';
+                    break;
+                case '¿cómo ver mi perfil?':
+                    response = 'Para ver tu perfil, haz clic en el botón "Ver Perfil" en la parte superior del chat. Allí podrás ver y editar tus detalles.';
+                    break;
+                default:
+                    response = 'Lo siento, no tengo una respuesta para eso. Por favor, intenta preguntar algo diferente.';
+            }
+
+            const responseElement = document.createElement('div');
+            responseElement.className = 'chatbot-response';
+            responseElement.textContent = response;
+            responseContainer.appendChild(responseElement);
+            responseContainer.scrollTop = responseContainer.scrollHeight; // Desplazarse al final
+        }
+    </script>
+</body>
+</html>
